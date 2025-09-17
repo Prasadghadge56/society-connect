@@ -1,10 +1,13 @@
 package com.society.service;
 
 import com.society.entity.Complaint;
+import com.society.entity.User;
 import com.society.repository.ComplaintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -13,7 +16,7 @@ public class ComplaintService {
     @Autowired
     private ComplaintRepository complaintRepository;
 
-    // 1. File complaint
+    // 1. File complaint (with image already set in controller)
     public Complaint fileComplaint(Complaint complaint) {
         return complaintRepository.save(complaint);
     }
@@ -45,5 +48,10 @@ public class ComplaintService {
     // 6. Delete complaint
     public void deleteComplaint(Long id) {
         complaintRepository.deleteById(id);
+    }
+
+    // 7. Get complaints by status
+    public List<Complaint> getComplaintsByStatus(String status) {
+        return complaintRepository.findByStatus(status.toUpperCase());
     }
 }

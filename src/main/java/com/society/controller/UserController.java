@@ -21,6 +21,7 @@ public class UserController {
         try {
             User savedUser = userService.register(user);
             return ResponseEntity.ok(Map.of("message", "User registered", "user", savedUser));
+
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
